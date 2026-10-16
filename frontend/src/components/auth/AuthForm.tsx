@@ -39,7 +39,8 @@ export default function AuthForm({ isLogin, onSubmit }: AuthFormProps) {
     }
   }
 
-  return <form onSubmit={handleSubmit} className="space-y-4">
+  return (
+    <form onSubmit={handleSubmit} className="space-y-4">
       <FormInput
         id="email"
         type="email"
