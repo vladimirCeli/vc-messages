@@ -1,0 +1,134 @@
+# ============================================
+# Python
+# ============================================
+.venv/
+venv/
+env/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+.coverage
+*.egg-info/
+dist/
+build/
+
+# ============================================
+# Environment Variables (IMPORTANTE)
+# ============================================
+# Bloquear .env con credenciales reales
+.env
+src/.env
+backend/.env
+frontend/.env
+
+# Permitir .env.example (plantillas sin credenciales)
+!.env.example
+!src/.env.example
+!backend/.env.example
+!frontend/.env.example
+
+# ============================================
+# Node.js / Frontend
+# ============================================
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+.npm
+.yarn
+
+# Build outputs
+dist/
+build/
+.vite/
+.next/
+out/
+
+# ============================================
+# Backend
+# ============================================
+# PostgreSQL
+*.db
+*.sqlite
+*.sqlite3
+
+# Logs
+logs/
+*.log
+
+# ============================================
+# iOS (Capacitor/Xcode)
+# ============================================
+ios/App/Pods/
+ios/App/build/
+ios/App/DerivedData/
+ios/DerivedData/
+*.xcuserstate
+*.xcworkspace/xcuserdata/
+*.xcodeproj/xcuserdata/
+*.xcodeproj/project.xcworkspace/xcuserdata/
+xcuserdata/
+
+# ============================================
+# Android (Capacitor)
+# ============================================
+android/.gradle/
+android/build/
+android/app/build/
+android/captures/
+android/local.properties
+*.iml
+.gradle/
+.idea/
+
+# ============================================
+# Sistema Operativo
+# ============================================
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+
+# ============================================
+# IDEs / Editores
+# ============================================
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.project
+.classpath
+.settings/
+
+# ============================================
+# Datos del Proyecto (Trading)
+# ============================================
+/data/*
+!/data/live_lab/
+/data/live_lab/*
+!/data/live_lab/state.json
+!/data/live_lab/trades.csv
+!/data/live_lab/capital.json
+!/data/live_lab_4h/
+/data/live_lab_4h/*
+!/data/live_lab_4h/state.json
+!/data/live_lab_4h/trades.csv
+!/data/live_lab_4h/capital.json
+/reports/
+
+# ============================================
+# Otros
+# ============================================
+.claude/
+/.ollama-local/
+*.tmp
+*.temp
+.cache/
