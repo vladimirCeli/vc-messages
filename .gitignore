@@ -55,8 +55,9 @@ out/
 *.sqlite
 *.sqlite3
 
-# Logs
-logs/
+# Logs (allow directory structure, ignore files)
+logs/*.log
+logs/*.pid
 *.log
 
 # ============================================
