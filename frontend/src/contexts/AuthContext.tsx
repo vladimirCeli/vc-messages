@@ -1,6 +1,6 @@
 import { createContext, useContext, useState, useEffect } from 'react'
 import type { ReactNode } from 'react'
-import { api } from '../lib/api'
+import { api, login as apiLogin, register as apiRegister } from '../lib/api'
 import type { User } from '../lib/api'
 import { ws } from '../lib/websocket'
 
@@ -33,14 +33,14 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }, [])
 
   const login = async (email: string, password: string) => {
-    const { token, user } = await api.login(email, password)
+    const { token, user } = await apiLogin(email, password)
     api.setToken(token)
     setUser(user)
     ws.connect(token)
   }
 
   const register = async (email: string, username: string, password: string, displayName?: string) => {
-    const { token, user } = await api.register(email, username, password, displayName)
+    const { token, user } = await apiRegister(email, username, password, displayName)
     api.setToken(token)
     setUser(user)
     ws.connect(token)

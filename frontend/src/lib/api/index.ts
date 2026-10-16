@@ -1,0 +1,5 @@
+export { apiClient as api } from './client'
+export { register, login } from './auth'
+export { getConversations } from './conversations'
+export { getMessages } from './messages'
+export type { User, AuthResponse, Conversation, Message } from './types'
