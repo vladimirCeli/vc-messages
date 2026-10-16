@@ -13,7 +13,48 @@ GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
 NC='\033[0m' # No Color
 
-# Check if database exists
+# Check prerequisites
+echo "🔍 Checking prerequisites..."
+echo ""
+
+MISSING=""
+
+if ! command -v bun &> /dev/null; then
+    echo "${RED}✗ Bun not installed${NC}"
+    MISSING="${MISSING}bun "
+else
+    echo "${GREEN}✓ Bun installed${NC}"
+fi
+
+if ! command -v node &> /dev/null; then
+    echo "${RED}✗ Node.js not installed${NC}"
+    MISSING="${MISSING}node "
+else
+    echo "${GREEN}✓ Node.js installed${NC}"
+fi
+
+if ! command -v psql &> /dev/null; then
+    echo "${RED}✗ PostgreSQL not installed${NC}"
+    MISSING="${MISSING}postgresql "
+else
+    echo "${GREEN}✓ PostgreSQL installed${NC}"
+fi
+
+if ! command -v redis-server &> /dev/null; then
+    echo "${RED}✗ Redis not installed${NC}"
+    MISSING="${MISSING}redis "
+else
+    echo "${GREEN}✓ Redis installed${NC}"
+fi
+
+if [ ! -z "$MISSING" ]; then
+    echo ""
+    echo "${RED}Missing dependencies. Install with:${NC}"
+    echo "  brew install ${MISSING}"
+    exit 1
+fi
+
+echo ""
 echo "📊 Checking PostgreSQL..."
 if ! psql -lqt | cut -d \| -f 1 | grep -qw vc_messages; then
     echo "${YELLOW}Creating database vc_messages...${NC}"
@@ -25,10 +66,25 @@ fi
 
 # Check Redis
 echo ""
-echo "🔴 Starting Redis..."
-redis-server --daemonize yes
-sleep 1
-echo "${GREEN}✓ Redis running on port 6379${NC}"
+echo "🔴 Checking Redis..."
+if ! command -v redis-server &> /dev/null; then
+    echo "${RED}✗ Redis not installed${NC}"
+    echo ""
+    echo "Install Redis:"
+    echo "  brew install redis"
+    echo ""
+    echo "Then run this script again."
+    exit 1
+fi
+
+echo "Starting Redis..."
+if redis-cli ping &> /dev/null; then
+    echo "${GREEN}✓ Redis already running${NC}"
+else
+    redis-server --daemonize yes
+    sleep 1
+    echo "${GREEN}✓ Redis started on port 6379${NC}"
+fi
 
 # Backend setup
 echo ""
